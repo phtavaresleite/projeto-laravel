@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('fornecedors', function (Blueprint $table) {
             $table->id();
             $table->string('nome',50);
-            
+            $table->string('site',150)->default('sem site');
+            $table->string('uf',2)->default('');
+            $table->string('email',50)->default('sem email');
             $table->timestamps();
         });
     }
