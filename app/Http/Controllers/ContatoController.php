@@ -20,8 +20,22 @@ class ContatoController extends Controller
         // $contato->save(); // Save the contact information to the database
 
         // Alternatively, you can use the create method
-        SiteContato::create($request->all()); // Create a new contact using mass assignment
-
+        //SiteContato::create($request->all()); // Create a new contact using mass assignment
+http://0.0.0.0/
         return view('site.contato', ['titulo' => 'Contato']);
     }   
+
+    public function salvar(Request $request){
+        // Validate the request data
+        $request->validate([
+            'nome' => 'required | min:3 | max:40',
+            'telefone' => 'required | max:15',
+            'email' => 'required',
+            'motivo_contato' => 'required',
+            'mensagem' => 'required',
+        ]);
+        //SiteContato::create($request->all());
+
+        return redirect()->route('site.index'); // Redirect to the main page after saving
+    }
 }
