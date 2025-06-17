@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LogAcessoMiddleware;
 
 // Route::get('/', function () {
 //     return "Olá, seja bem vindo";
@@ -26,7 +27,7 @@ options
 */
         
 //definindo rotas com controller      
-Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index');
+Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index')->middleware(LogAcessoMiddleware::class);
 Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
 Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
 Route::post('/contato', [App\Http\Controllers\ContatoController::class, 'salvar'])->name('site.contato');
