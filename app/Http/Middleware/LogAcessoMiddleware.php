@@ -21,6 +21,9 @@ class LogAcessoMiddleware
         $rota = $request->getRequestUri(); // Get the requested URI
         LogAcesso::create(['log' => "IP: $ip - Rota: $rota"]); // Log the access
         //return Response('Acesso registrado com sucesso!', 200); // Return a response indicating success
-        return $next($request);
+        $resposta = $next($request);
+        $resposta->setStatusCode(201, 'Acesso registrado com sucesso!');
+
+        return $resposta;
     }
 }

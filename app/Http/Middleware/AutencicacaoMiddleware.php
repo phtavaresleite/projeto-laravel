@@ -15,14 +15,15 @@ class AutencicacaoMiddleware
      */
     public function handle(Request $request, Closure $next, $metodo_autenticacao): Response
     {
+        session_start();
 
-        echo "Passando pelo middleware de autenticação: $metodo_autenticacao <br>";
-        if(true){
+        if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
             return $next($request);
+        } else {
+            return redirect()->route('site.login', ['erro' => 2]);
         }
-        else{ 
-            return Response('Acesso negado!');
-        }
-
+        
+        //return $next($request);
+        
     }
 }
